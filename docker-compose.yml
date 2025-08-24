@@ -1,0 +1,49 @@
+services:
+  ems-db:
+    image: mysql:8
+    container_name: ems-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+    networks:
+      - ems-net
+    ports:
+      - "3306:3306"
+    volumes:
+      - ems-db-data:/var/lib/mysql
+
+  ems-backend:
+    image: ems-backend
+    container_name: ems-backend
+    restart: always
+    depends_on:
+      - ems-db
+    networks:
+      - ems-net
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./ems-backend/.env.properties:/app/.env.properties
+
+  ems-frontend:
+    image: ems-frontend
+    container_name: ems-frontend
+    restart: always
+    environment:
+      REACT_APP_BACKEND_URL: http://ems-backend:8080/api/employees
+    depends_on:
+      - ems-backend
+    networks:
+      - ems-net
+    ports:
+      - "5173:5173"
+
+networks:
+  ems-net:
+    external: true 
+
+volumes:
+  ems-db-data:
