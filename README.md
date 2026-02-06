@@ -31,7 +31,7 @@ employee-management-system/
 - [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)  
 - [MySQL 8.0+](https://dev.mysql.com/) (optional, if not running via Docker)  
 
-### Running with Docker  
+### Running with Docker (recommended option)  
 1. Clone the repository:  
    ```bash
    git clone https://github.com/TaviF24/employee-management-system.git
