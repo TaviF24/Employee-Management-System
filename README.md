@@ -34,7 +34,7 @@ employee-management-system/
 ### Running with Docker  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/employee-management-system.git
+   git clone https://github.com/TaviF24/employee-management-system.git
    cd employee-management-system
    ```
 2. Build and start the containers:  
