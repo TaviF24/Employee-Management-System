@@ -1,10 +1,13 @@
+# # Build stage
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /src
+COPY pom.xml .
+COPY src ./src
+RUN mvn -DskipTests package
+
+# Run stage
 FROM eclipse-temurin:21
-
 WORKDIR /app
-
-COPY target/ems-backend-0.0.1-SNAPSHOT.jar /app/ems-backend.jar
-
+COPY --from=build /src/target/*.jar /app/ems-backend.jar
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "ems-backend.jar"]
-
+ENTRYPOINT ["java","-jar","/app/ems-backend.jar"]
